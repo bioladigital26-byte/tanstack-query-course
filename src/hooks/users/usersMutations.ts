@@ -43,7 +43,7 @@ export function useCreateUserMutation() {
 
       return { previousUsers };
     },
-    onSuccess: (data, variables, context) => {
+    onSuccess: (data, _, context) => {
       queryClient.setQueryData(USERS_QUERY_KEY, [data, ...(context?.previousUsers || [])] );
     },
     onError: (_, __, context) => {

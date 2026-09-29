@@ -1,11 +1,7 @@
 import {
-  keepPreviousData,
-  useQueries,
   useQuery,
-  useQueryClient,
 } from "@tanstack/react-query";
 import { api } from "../api/api";
-import { Suspense } from "react";
 import { Link } from "react-router";
 
 type Post = {
@@ -17,12 +13,6 @@ function getPosts() {
   return api.get<Post[]>("/posts", {}).then((res) => res.data);
 }
 
-function getNotifications() {
-  return api
-    .get<{ notificationsCount: number }>(`/notifications`)
-    .then((res) => res.data);
-}
-
 // const ServerPageInNextJs = () => {
 //   const posts = await getPosts();
 
@@ -30,14 +20,9 @@ function getNotifications() {
 // }
 
 function PostsList() {
-  const queryClient = useQueryClient();
-
    // {id, title} - краткая инфа о посте для списка
   const {
     data: posts,
-    isFetching,
-    isLoading,
-    isPending,
   } = useQuery({
     queryKey: ["posts"],
     queryFn: getPosts,

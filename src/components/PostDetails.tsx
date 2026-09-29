@@ -3,7 +3,7 @@ import { api } from "../api/api";
 import { useParams } from "react-router";
 
 type Post = {
-  id: nustringmber;
+  id: number;
   title: string;
 };
 
@@ -21,7 +21,7 @@ export const PostDetails = () => {
     queryFn: () => getPostById(id ?? ""),
     placeholderData: () => {
       const posts = queryClient.getQueryData<Post[]>(["posts"]);
-      const foundPost = posts?.find((post: Post) => post.id === id);
+      const foundPost = posts?.find((post: Post) => post.id === Number(id));
       return foundPost;
     },
   });
